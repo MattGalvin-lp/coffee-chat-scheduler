@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  department String?
+  jobTitle   String?
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  interests      UserInterest[]
+  matchesAsUser1 Match[]        @relation("MatchUser1")
+  matchesAsUser2 Match[]        @relation("MatchUser2")
+
+  @@index([email])
+  @@index([isActive])
+}
+
+model Interest {
+  id       String         @id @default(cuid())
+  name     String         @unique
+  category String?
+
+  users UserInterest[]
+
+  @@index([category])
+}
+
+model UserInterest {
+  id         String @id @default(cuid())
+  userId     String
+  interestId String
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interest Interest @relation(fields: [interestId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, interestId])
+  @@index([userId])
+  @@index([interestId])
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  user1Id     String
+  user2Id     String
+  score       Float?
+  matchReason String?
+  emailSent   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user1 User @relation("MatchUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2 User @relation("MatchUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+
+  @@index([user1Id])
+  @@index([user2Id])
+  @@index([createdAt])
+  @@index([emailSent])
+}

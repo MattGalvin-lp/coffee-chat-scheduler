@@ -1,65 +1,74 @@
-import Image from "next/image";
+import { Coffee, Users, Mail, Calendar } from "lucide-react";
+import { SignupForm } from "@/components/signup-form";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+      {/* Header */}
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-4 flex items-center gap-2">
+          <Coffee className="h-6 w-6 text-amber-600" />
+          <span className="font-semibold text-gray-900">Coffee Chat</span>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-12">
+        {/* Hero */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Connect with coworkers over coffee
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-gray-600">
+            Sign up to be matched with colleagues for casual 1:1 conversations.
+            Build relationships, share ideas, and strengthen your team.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* How it works */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-3">
+              <Users className="h-5 w-5 text-amber-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">1. Sign Up</h3>
+            <p className="text-sm text-gray-600">
+              Share your interests and department so we can find great matches
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-3">
+              <Mail className="h-5 w-5 text-amber-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">2. Get Matched</h3>
+            <p className="text-sm text-gray-600">
+              Receive an email with your match and their contact info
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg p-6 shadow-sm border">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-3">
+              <Calendar className="h-5 w-5 text-amber-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-1">3. Meet Up</h3>
+            <p className="text-sm text-gray-600">
+              Schedule a 15-30 min chat and get to know each other
+            </p>
+          </div>
+        </div>
+
+        {/* Signup Form */}
+        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-sm border p-6 md:p-8">
+          <SignupForm />
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t mt-12 py-6">
+        <div className="container mx-auto px-4 text-center text-sm text-gray-500">
+          Coffee Chat Scheduler - Building connections one cup at a time
+        </div>
+      </footer>
     </div>
   );
 }
